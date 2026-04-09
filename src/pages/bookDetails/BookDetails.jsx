@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
+import { BookContext } from "../../context/BookProvider";
 
 const BookDetails = () => {
   const { bookId: bookParamsId } = useParams();
-
 
   const books = useLoaderData();
   console.log(books);
@@ -27,10 +27,17 @@ const BookDetails = () => {
     yearOfPublishing,
   } = expectedBook;
 
+
+  const {handleMarkAsRead, storedBooks} = useContext(BookContext)
+//   console.log(handleMarkAsRead,storedBooks);
+  
+
+
+ 
   return (
     <div className=" grid grid-cols-2 bg-base-100 shadow-sm w-[80%] mx-auto my-10">
       <figure className="w-full flex justify-center items-center bg-gray-100 rounded-2xl">
-        <img src={image} className="h-[400px] "  alt="Album" />
+        <img src={image} className="h-100 " alt="Album" />
       </figure>
       <div className="card-body space-y-3 ">
         <h2 className="card-title text-2xl">{bookName}</h2>
@@ -61,8 +68,15 @@ const BookDetails = () => {
           </div>
 
           <div className="flex items-center gap-2 ">
-            <button className="btn">Read</button>
-            <button className="btn btn-success text-white">Wishlist</button>
+            <button
+              onClick={() => handleMarkAsRead(expectedBook)}
+              className="btn"
+            >
+              Mark as Read
+            </button>
+            <button className="btn btn-success text-white">
+              Add to Wishlist
+            </button>
           </div>
         </div>
       </div>

@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { BookContext } from '../../context/BookProvider';
 
 const Books = () => {
-  return (
+  
+      const {storedBooks} = useContext(BookContext)
+      console.log(storedBooks);
+  
+    return (
     <div>
       Books
     </div>
